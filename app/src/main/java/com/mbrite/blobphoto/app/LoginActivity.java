@@ -190,7 +190,26 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return Utils.isValidUsernameAndPassword(mUsername, mPassword);
+            try {
+                return Utils.isValidUsernameAndPassword(mUsername, mPassword, LoginActivity.this);
+            } catch (URISyntaxException ex) {
+                mSignInButton.setError(ex.getLocalizedMessage());
+                Toast.makeText(
+                        LoginActivity.this,
+                        String.format(getString(R.string.error_site_url_invalid),
+                                Utils.getSiteURI(LoginActivity.this)),
+                        Toast.LENGTH_LONG)
+                        .show();
+            } catch (Exception ex) {
+                mSignInButton.setError(ex.getLocalizedMessage());
+                Toast.makeText(
+                        LoginActivity.this,
+                        String.format(getString(R.string.error_of), ex.getLocalizedMessage()),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            return false;
         }
 
         @Override
@@ -201,16 +220,7 @@ public class LoginActivity extends Activity {
             if (success) {
                 try {
                     Utils.savedUsernameAndPassword(LoginActivity.this, mUsername, mPassword);
-                    RestClient client = new RestClient(LoginActivity.this);
                     startActivity(new Intent("com.mbrite.blobphoto.app.action.main"));
-                } catch (URISyntaxException ex) {
-                    mSignInButton.setError(ex.getLocalizedMessage());
-                    Toast.makeText(
-                            LoginActivity.this,
-                            String.format(getString(R.string.error_site_url_invalid),
-                                    Utils.getSiteURI(LoginActivity.this)),
-                            Toast.LENGTH_LONG)
-                            .show();
                 } catch (Exception ex) {
                     mSignInButton.setError(ex.getLocalizedMessage());
                     Toast.makeText(

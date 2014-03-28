@@ -9,24 +9,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpResponseException;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.*;
+
+import java.util.*;
+
+import com.mbrite.blobphoto.connection.*;
 /**
  * Utility class
  */
 public class Utils {
-    public static boolean isValidUsernameAndPassword(String username, String password) {
-        // TODO: attempt authentication against a network service
-        try {
-            // Simulate network access.
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            return false;
-        }
-
+    public static boolean isValidUsernameAndPassword(String username, String password, Activity activity)
+            throws URISyntaxException, JSONException, IOException {
         if (TextUtils.isEmpty(password)) {
             return false;
         }
 
+        List<BasicNameValuePair> payload = new ArrayList<BasicNameValuePair>(2);
+        payload.add(new BasicNameValuePair(Constants.USER_NAME, username));
+        payload.add(new BasicNameValuePair(Constants.PASSWORD, password));
+        HttpResponse response = RestClient.INSTANCE.post(activity, Constants.LOGIN, payload);
+        int statusCode = response.getStatusLine().getStatusCode();
+        switch (statusCode) {
+            case 200:
+                RestClient.INSTANCE.setCookie(response);
+                break;
+            default:
+                throw new HttpResponseException(statusCode, "Error occurred for Login request");
+        }
         return true;
     }
 

@@ -8,7 +8,10 @@ import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.client.entity.*;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -16,9 +19,13 @@ import java.util.*;
 import com.mbrite.blobphoto.common.*;
 import com.mbrite.blobphoto.app.*;
 
-public class RestClient {
+public enum RestClient {
+
+    INSTANCE;
 
     private URI siteURI;
+
+    private String cookie;
 
     {
         StrictMode.ThreadPolicy policy =
@@ -26,12 +33,18 @@ public class RestClient {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public RestClient(Activity activity) throws URISyntaxException {
+    private URI getSiteURI(Activity activity)
+            throws URISyntaxException {
+        if (this.siteURI != null) {
+            return this.siteURI;
+        }
+
         String site = Utils.getSiteURI(activity);
         if (TextUtils.isEmpty(site)) {
             throw new IllegalStateException(activity.getString(R.string.error_site_url_missing));
         }
         this.siteURI = new URI(site);
+        return this.siteURI;
     }
 
     public HttpResponse get(String relativeURI)
@@ -48,20 +61,30 @@ public class RestClient {
                 request.setHeader(header.getKey(), header.getValue());
             }
         }
+        if (cookie != null) {
+            request.addHeader(Constants.COOKIE, cookie);
+        }
         return client.execute(request);
     }
 
-    public String post(String relativeURI, String payload, String contentType)
-            throws IOException {
+    public HttpResponse post(Activity activity, String relativeURI, List<BasicNameValuePair> payload)
+            throws IOException, URISyntaxException {
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(this.siteURI.resolve(relativeURI));
-        StringEntity input = new StringEntity(payload);
-        post.setEntity(input);
-        if (contentType != null) {
-            input.setContentType(contentType);
+        HttpPost post = new HttpPost(getSiteURI(activity).resolve(relativeURI));
+        post.setEntity(new UrlEncodedFormEntity(payload));
+        if (cookie != null) {
+            post.addHeader(Constants.COOKIE, cookie);
         }
-        HttpResponse response = client.execute(post);
-        return Utils.convertStreamToString(response.getEntity().getContent());
+        return client.execute(post);
+    }
+
+    public void setCookie(HttpResponse response) {
+        for (Header header : response.getAllHeaders()) {
+            if (header.getName().equalsIgnoreCase(Constants.COOKIES_HEADER)) {
+                cookie = header.getValue();
+                return;
+            }
+        }
     }
 }
 

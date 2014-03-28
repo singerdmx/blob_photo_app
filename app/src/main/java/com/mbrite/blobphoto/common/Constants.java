@@ -9,6 +9,9 @@ public class Constants {
     public static final String PASSWORD = "password";
     public static final String PREFERENCE_FILE_KEY = "com.mbrite.blobphoto.preference_file_key";
     public static final String SITE_URL = "site_url";
+    public static final String LOGIN = "login";
+    public static final String COOKIES_HEADER = "Set-Cookie";
+    public static final String COOKIE = "Cookie";
 
     // Network related constants
     public static final String ETAG= "Etag";
