@@ -47,15 +47,15 @@ public enum RestClient {
         return this.siteURI;
     }
 
-    public HttpResponse get(String relativeURI)
-            throws IOException {
-        return get(relativeURI, null);
+    public HttpResponse get(Activity activity, String relativeURI)
+            throws IOException, URISyntaxException {
+        return get(activity, relativeURI, null);
     }
 
-    public HttpResponse get(String relativeURI, Map<String, String> headers)
-            throws IOException {
+    public HttpResponse get(Activity activity, String relativeURI, Map<String, String> headers)
+            throws IOException, URISyntaxException {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(this.siteURI.resolve(relativeURI));
+        HttpGet request = new HttpGet(getSiteURI(activity).resolve(relativeURI));
         if (headers != null) {
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 request.setHeader(header.getKey(), header.getValue());
