@@ -9,16 +9,33 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/blob_photo"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.mbrite.blobphoto.app.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/blob_photo"
+            android:theme="@android:style/Theme.Light" >
+            <intent-filter>
+                <action android:name="com.mbrite.patrol.app.action.main" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mbrite.blobphoto.app.LoginActivity"
+            android:label="@string/blob_photo"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mbrite.blobphoto.app.SettingsActivity"
+            android:label="@string/settings"
+            android:theme="@android:style/Theme.Light" >
         </activity>
     </application>
 

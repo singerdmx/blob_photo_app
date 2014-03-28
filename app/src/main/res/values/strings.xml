@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BlobPhoto</string>
+    <string name="blob_photo">Blob Photo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Log out</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">Submit</string>
+    <string name="error_of">Error: %s</string>
+
+    <!-- Strings related to settings -->
+    <string name="site_url">Site URL</string>
+    <string name="error_site_url_missing">Site URL is not set! Please configure it in Settings menu.</string>
+    <string name="error_site_url_invalid">Site URL %s is invalid! Please configure it in Settings menu.</string>
+    <string name="error_network_connection_failure">Failed to connect to site %s.</string>
+
+    <!-- Strings related to login -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
 
 </resources>
