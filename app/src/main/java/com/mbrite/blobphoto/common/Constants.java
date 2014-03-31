@@ -18,4 +18,9 @@ public class Constants {
     public static final String LAST_MODIFIED = "Last-Modified";
     public static final String IF_NONE_MATCH= "If-None-Match";
     public static final String IF_MODIFIED_SINCE = "If-Modified-Since";
+
+    // Image related constants
+    public static final String IMAGES = "images";
+    public static final String IMAGE = "image";
+    public static final String DESC = "desc";
 }

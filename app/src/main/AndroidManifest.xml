@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- Include next permission if you want to allow UIL to cache images on SD card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,7 @@
             android:label="@string/blob_photo"
             android:theme="@android:style/Theme.Light" >
             <intent-filter>
-                <action android:name="com.mbrite.patrol.app.action.main" />
+                <action android:name="com.mbrite.blobphoto.app.action.main" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

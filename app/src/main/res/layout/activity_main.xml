@@ -8,9 +8,23 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.mbrite.blobphoto.app.MainActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <fragment
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:name="com.mbrite.blobphoto.app.MainFragment"
+        android:id="@+id/main"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/footer"/>
+
+    <LinearLayout android:id="@+id/footer" android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_alignParentBottom="true" style="@android:style/ButtonBar">
+
+        <Button android:id="@+id/upload_button" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="@string/upload_image" />
+
+    </LinearLayout>
 
 </RelativeLayout>

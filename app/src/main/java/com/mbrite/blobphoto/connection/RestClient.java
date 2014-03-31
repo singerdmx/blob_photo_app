@@ -33,7 +33,7 @@ public enum RestClient {
         StrictMode.setThreadPolicy(policy);
     }
 
-    private URI getSiteURI(Activity activity)
+    public URI getSiteURI(Activity activity)
             throws URISyntaxException {
         if (this.siteURI != null) {
             return this.siteURI;
@@ -41,7 +41,7 @@ public enum RestClient {
 
         String site = Utils.getSiteURI(activity);
         if (TextUtils.isEmpty(site)) {
-            throw new IllegalStateException(activity.getString(R.string.error_site_url_missing));
+            site = "http://photobox.cfapps.io";
         }
         this.siteURI = new URI(site);
         return this.siteURI;
