@@ -183,6 +183,8 @@ public class ImageUploadActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "Photo uploaded successfully",
                         Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ImageUploadActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         }
     }

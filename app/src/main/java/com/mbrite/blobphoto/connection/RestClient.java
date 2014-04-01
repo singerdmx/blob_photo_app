@@ -44,7 +44,7 @@ public enum RestClient {
 
         String site = Utils.getSiteURI(activity);
         if (TextUtils.isEmpty(site)) {
-            site = "http://192.168.0.49:9292";
+            site = "http://photobox.cfapps.io";
         }
         this.siteURI = new URI(site);
         return this.siteURI;

@@ -48,6 +48,32 @@ public class MainFragment extends ListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            this.imageProvider = new ImageProvider(getActivity());
+            this.images = imageProvider.getImages();
+        }catch (JSONException ex) {
+            Toast.makeText(
+                    getActivity(),
+                    String.format("JSONException: %s", ex.getLocalizedMessage()),
+                    Toast.LENGTH_LONG)
+                    .show();
+        } catch (Exception ex) {
+            Toast.makeText(
+                    getActivity(),
+                    String.format("Error: %s", ex.getLocalizedMessage()),
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+
+        ImageAdapter adapter = new ImageAdapter(
+                getActivity(),
+                images);
+        setListAdapter(adapter);
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, final int position, long id) {
         Log.d(TAG, "ROW ID: " + id);
         final Image image = (Image) getListAdapter().getItem(position);
