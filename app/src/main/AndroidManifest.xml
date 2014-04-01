@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!-- Include next permission if you want to allow UIL to cache images on SD card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,11 @@
         <activity
             android:name="com.mbrite.blobphoto.app.SettingsActivity"
             android:label="@string/settings"
+            android:theme="@android:style/Theme.Light" >
+        </activity>
+        <activity
+            android:name="com.mbrite.blobphoto.app.ImageUploadActivity"
+            android:label="@string/upload_image"
             android:theme="@android:style/Theme.Light" >
         </activity>
     </application>

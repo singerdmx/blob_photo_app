@@ -23,4 +23,5 @@ public class Constants {
     public static final String IMAGES = "images";
     public static final String IMAGE = "image";
     public static final String DESC = "desc";
+    public static final String UPLOAD = "upload";
 }

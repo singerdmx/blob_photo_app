@@ -5,7 +5,10 @@ import android.app.*;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.mbrite.blobphoto.common.Utils;
 import com.nostra13.universalimageloader.core.*;
 
 public class MainActivity extends Activity {
@@ -23,6 +26,15 @@ public class MainActivity extends Activity {
                 .defaultDisplayImageOptions(defaultOptions)
                 .build();
         ImageLoader.getInstance().init(config);
+
+        Button uploadButton = (Button) findViewById(R.id.upload_button);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ImageUploadActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -41,6 +53,7 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.logout:
+                Utils.clearUsernameAndPassword(this);
                 startActivity(new Intent(this, LoginActivity.class));
                 return true;
             case R.id.settings:

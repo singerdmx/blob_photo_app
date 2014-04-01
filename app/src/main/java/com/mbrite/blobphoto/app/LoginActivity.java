@@ -17,10 +17,21 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 
+import java.io.ByteArrayOutputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 import com.mbrite.blobphoto.common.*;
 import com.mbrite.blobphoto.connection.*;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 /**
  * A login screen that offers login via username/password.
